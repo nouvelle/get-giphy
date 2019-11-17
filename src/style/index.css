@@ -50,3 +50,7 @@ input[type="text"]:focus,
 .btn:focus {
   outline: 0;
 }
+.imgTitle {
+  margin: 15px 0 5px;
+  font-size: 14px;
+}
