@@ -24,8 +24,8 @@ code {
   font-size: calc(10px + 2vmin);
 }
 .contents {
-  width: 350px;
-  height: 250px;
+  width: 550px;
+  height: 550px;
   margin: 0 auto;
   padding: 30px;
   background: rgba(255, 255, 255, 0.8);

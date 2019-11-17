@@ -1,43 +1,35 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { callAPIAsync } from "../redux/redux";
 import "../style/index.css";
 
 class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      convert: {
-        description: "",
-        dislike_count: "",
-        like_count: "",
-        site: "YouTube",
-        streams: [],
-        tags: [],
-        thumbnail: "",
-        title: "",
-        upload_date: "",
-        uploader: "",
-        uploader_url: "",
+      gifImg: {
         url: "",
-        view_count: ""
+        title: "",
+        source: ""
       }
     };
   }
 
   render() {
+    const imgURL = this.props.gifImg.url;
     return (
       <div>
-        <p>Result</p>
-        <div>{this.props.description}</div>
+        <div>{this.props.gifImg.title}</div>
+        {(() => {
+          if (imgURL) return <img src={imgURL} alt="gif animation" />;
+        })()}
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
   return {
-    callAPIAsync: code => dispatch(callAPIAsync(code))
+    gifImg: state.gifImg
   };
 };
-export default connect(null, mapDispatchToProps)(Input);
+export default connect(mapStateToProps)(Input);

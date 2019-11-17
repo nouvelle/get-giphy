@@ -4,7 +4,11 @@ import thunk from "redux-thunk";
 // initial STATE
 const initialState = {
   bkImg: "",
-  gifImg: ""
+  gifImg: {
+    url: "",
+    title: "",
+    source: ""
+  }
 };
 
 // ACTION
@@ -12,9 +16,11 @@ export const getBkImg = img => ({
   type: "GET_BK_IMG",
   img
 });
-export const getConvert = img => ({
+export const getConvert = imgData => ({
   type: "GET_CONVERT",
-  img
+  url: imgData.images.downsized.url,
+  title: imgData.title,
+  source: imgData.source
 });
 
 // ACTION CREATOR
@@ -31,9 +37,8 @@ export const getBkImgAsync = dispatch => {
 };
 
 export const callAPIAsync = keyward => dispatch => {
-  // const reqURL = `https://getvideo.p.rapidapi.com/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3D${keyward}`;
-  const reqURL =
-    "https://giphy.p.rapidapi.com/v1/gifs/search?limit=1&q=starbucks&api_key=dc6zaTOxFJmzC";
+  const reqURL = `https://giphy.p.rapidapi.com/v1/gifs/search?limit=1&q=${keyward}&api_key=${process.env.REACT_APP_GIPHY_API_KEY}`;
+  console.log(reqURL);
   fetch(reqURL, {
     method: "GET",
     headers: {
@@ -42,9 +47,7 @@ export const callAPIAsync = keyward => dispatch => {
     }
   })
     .then(response => {
-      // return dispatch(getConvert(response));
       response.json().then(data => {
-        console.log(data.data[0]);
         return dispatch(getConvert(data.data[0]));
       });
     })
@@ -60,7 +63,14 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { bkImg: action.img });
     }
     case "GET_CONVERT": {
-      return Object.assign({}, state, { gifImg: action.img });
+      console.log("img", action);
+      return Object.assign({}, state, {
+        gifImg: {
+          url: action.url,
+          title: action.title,
+          source: action.source
+        }
+      });
     }
     default:
       return state;
