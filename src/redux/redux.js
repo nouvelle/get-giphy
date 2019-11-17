@@ -38,7 +38,6 @@ export const getBkImgAsync = dispatch => {
 
 export const callAPIAsync = keyward => dispatch => {
   const reqURL = `https://giphy.p.rapidapi.com/v1/gifs/search?limit=1&q=${keyward}&api_key=${process.env.REACT_APP_GIPHY_API_KEY}`;
-  console.log(reqURL);
   fetch(reqURL, {
     method: "GET",
     headers: {
@@ -48,7 +47,9 @@ export const callAPIAsync = keyward => dispatch => {
   })
     .then(response => {
       response.json().then(data => {
-        return dispatch(getConvert(data.data[0]));
+        if (data.data.length !== 0) {
+          return dispatch(getConvert(data.data[0]));
+        }
       });
     })
     .catch(err => {
@@ -63,7 +64,6 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { bkImg: action.img });
     }
     case "GET_CONVERT": {
-      console.log("img", action);
       return Object.assign({}, state, {
         gifImg: {
           url: action.url,

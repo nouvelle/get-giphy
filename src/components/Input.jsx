@@ -6,7 +6,6 @@ import "../style/index.css";
 class Input extends Component {
   callAPI = () => {
     const keyward = document.getElementById("input").value;
-    console.log(keyward);
     if (keyward !== "") this.props.callAPIAsync(keyward);
     document.getElementById("input").value = "";
   };
