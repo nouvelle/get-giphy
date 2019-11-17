@@ -5,4 +5,4 @@ You can get git animation.
 
 You can check out the app on [Heroku](https://get-giphy.herokuapp.com/)!
 
-![image](https://github.com/nouvelle/get-giphy/blob/master/images/top.mp4?raw=true)
+![image](https://github.com/nouvelle/get-giphy/blob/master/images/top.gif?raw=true)
