@@ -21,7 +21,7 @@ class Input extends Component {
         <div className="imgTitle">{this.props.gifImg.title}</div>
         {(() => {
           if (imgURL) {
-            return <img src={imgURL} alt="gif animation" />;
+            return <img src={imgURL} alt="gif animation" className="gifImg" />;
           }
         })()}
       </div>
