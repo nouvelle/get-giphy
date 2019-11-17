@@ -15,7 +15,9 @@ class Input extends Component {
       <div>
         <div>Please input keyword</div>
         <input id="input" type="text" />
-        <button onClick={this.callAPI}>GET</button>
+        <button onClick={this.callAPI} className="btn">
+          GET
+        </button>
       </div>
     );
   }
